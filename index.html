@@ -52,7 +52,6 @@
         transform: translateY(-50%);
         text-align: right;
         font-size: 26px;
-        background: rgba(255, 255, 255, 0.1);
         padding: 20px 30px;
         border-radius: 15px;
         border: 1px solid rgba(255, 255, 255, 0.3);
@@ -60,15 +59,11 @@
         backdrop-filter: blur(4px);
         opacity: 0;
         transition: opacity 1s ease-in-out;
+		 background: rgba(0, 0, 0, 0.55); /* ←← هنا التعتيم الجديد */
+
     }
 
-    /* جرس */
-    #bell {
-        font-size: 40px;
-        margin-top: 10px;
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-    }
+  
 
     /* زر الظرف */
     #revealBtn {
@@ -168,7 +163,7 @@
 
 <div id="title">🎄 رسالة الميلاد 🎄</div>
 <div id="messageBox">تُحمَّل رسالتك الآن...</div>
-<div id="bell">🔔</div>
+
 <button id="revealBtn">افتح الرسالة</button>
 
 <audio id="bellSound">
