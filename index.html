@@ -35,7 +35,7 @@ body {
 
 /* العنوان */
 #title {
-    font-size: 6vw; /* حجم متغير حسب العرض */
+    font-size: 6vw; 
     color: #ffd700;
     text-align: center;
     text-shadow: 0 0 12px rgba(0,0,0,1),0 0 25px rgba(0,0,0,0.9);
@@ -53,7 +53,7 @@ body {
     box-shadow: 0 0 25px rgba(255,255,255,0.5);
     backdrop-filter: blur(4px);
     opacity: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.65); /* أغُمق شوية */
     word-wrap: break-word;
     white-space: normal;
     text-align: center;
@@ -194,27 +194,28 @@ btn.addEventListener("click",()=>{
     setTimeout(()=>{ form.classList.add("show");},1500);
 });
 
-    document.getElementById("sendBtn").addEventListener("click", ()=>{
-    const wish = document.getElementById("wishText").value.trim();
-    if(!wish){ alert("اكتب الطلبة الأول 🙏"); return; }
+document.getElementById("sendBtn").addEventListener("click",()=>{
+    const wish=document.getElementById("wishText").value.trim();
+    if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
 
-    fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec", {
-        method: "POST",
-        body: JSON.stringify({wish: wish}),
-        headers: {
-            "Content-Type": "application/json"
-        }
+    // fetch مع Google Apps Script Web App URL
+    fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_WEB_APP_URL/exec",{
+        method:"POST",
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({wish:wish})
     })
-    .then(res => res.json())
-    .then(data => {
-        if(data.status === "success"){
+    .then(res=>res.json())
+    .then(data=>{
+        if(data.status==="success"){
             alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!");
-            document.getElementById("wishText").value = ""; // تفرغ النص بعد الإرسال
+            document.getElementById("wishText").value="";
         } else {
-            alert("حدث خطأ: " + data.message);
+            alert("حدث خطأ: "+data.message);
         }
     })
-    .catch(err => alert("حدث خطأ: " + err));
+    .catch(err=>{
+        alert("Error: "+err);
+    });
 });
 </script>
 </body>
