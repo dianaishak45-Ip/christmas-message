@@ -252,18 +252,6 @@
 
 ];
 
-
-
-
-
-
-
-
-
-
-
-
-    
     const btn = document.getElementById("revealBtn");
     const msgBox = document.getElementById("messageBox");
     const bell = document.getElementById("bellSound");
@@ -278,14 +266,39 @@
         setTimeout(()=>{ form.classList.add("show"); },1500);
     });
 
-    document.getElementById("sendBtn").addEventListener("click",()=>{
+  /*  document.getElementById("sendBtn").addEventListener("click",()=>{
         const wish=document.getElementById("wishText").value.trim();
         if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
         fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",
         {method:"POST",body:JSON.stringify({wish:wish})})
         .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
         .catch(err=>alert("Error: "+err));
-    });
+    }); */
+
+    document.getElementById("sendBtn").addEventListener("click", () => {
+    const wish = document.getElementById("wishText").value.trim();
+    if (!wish) {
+        alert("اكتب الطلبة الأول 🙏");
+        return;
+    }
+
+    // 1️⃣ إظهار رسالة نجاح فورًا
+    alert("💛 تم إرسال الطلبة — ربنا يسمعك!"); 
+
+    // 2️⃣ إرسال الطلبة في الخلفية
+    fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wish: wish })
+    })
+    .then(res => {
+        if (!res.ok) {
+            console.error("خطأ في إرسال الطلبة:", res.status, res.statusText);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+});
+
 </script>
 </body>
 </html>
