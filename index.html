@@ -194,29 +194,16 @@ btn.addEventListener("click",()=>{
     setTimeout(()=>{ form.classList.add("show");},1500);
 });
 
-document.getElementById("sendBtn").addEventListener("click",()=>{
-    const wish=document.getElementById("wishText").value.trim();
-    if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
 
-    // fetch مع Google Apps Script Web App URL
-    fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_WEB_APP_URL/exec",{
-        method:"POST",
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({wish:wish})
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        if(data.status==="success"){
-            alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!");
-            document.getElementById("wishText").value="";
-        } else {
-            alert("حدث خطأ: "+data.message);
-        }
-    })
-    .catch(err=>{
-        alert("Error: "+err);
+    document.getElementById("sendBtn").addEventListener("click",()=>{
+        const wish=document.getElementById("wishText").value.trim();
+        if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
+        fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",
+        {method:"POST",body:JSON.stringify({wish:wish})})
+        .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
+        .catch(err=>alert("Error: "+err));
     });
-});
+
 </script>
 </body>
 </html>
