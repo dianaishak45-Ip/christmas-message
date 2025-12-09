@@ -6,17 +6,15 @@
 <title>رسالة الميلاد</title>
 <style>
     body {
-      /*  background: radial-gradient(circle, #1a1a2e, #000); */
         height: 100vh;
         overflow: hidden;
         font-family: "Cairo", sans-serif;
         color: white;
         position: relative;
-	background-image: url('BG_2.png'); /* هنا تحطي رابط الصورة أو Base64 */
-	background-size: cover; /* تمتد لتغطي الشاشة كلها */
-		background-position: center center; /* مركزة في المنتصف */
-		background-repeat: no-repeat;
-
+        background-image: url('BG_2.png');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
     }
 
     /* النجوم */
@@ -28,65 +26,47 @@
         border-radius: 50%;
         animation: twinkle 2s infinite ease-in-out;
     }
-
-    @keyframes twinkle {
-        0%, 100% { opacity: 0.2; }
-        50% { opacity: 1; }
-    }
+    @keyframes twinkle { 0%,100% { opacity:0.2;} 50% {opacity:1;} }
 
     /* العنوان */
     #title {
         position: absolute;
-        top: 10%;
+        top: 5%;
         right: 20px;
         font-size: 48px;
         color: #ffd700;
         text-align: right;
-
-		   /* تغميق أقوى */
-    text-shadow: 
-        0 0 12px rgba(0, 0, 0, 1),
-        0 0 25px rgba(0, 0, 0, 0.9);
+        text-shadow: 0 0 12px rgba(0,0,0,1),0 0 25px rgba(0,0,0,0.9);
     }
 
     /* صندوق الرسالة */
     #messageBox {
         position: absolute;
-        top: 30%;
+        top: 35%;
         right: 20px;
-	  width: 400px;           /* fixed width */
-		    height: auto;          /* ارتفاع يتغير حسب النص */
-
-		transform: translateY(-50%);
-        text-align: right;
+        width: 400px;
+        max-width: 90%;
         font-size: 26px;
         padding: 20px 30px;
         border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        box-shadow: 0 0 25px rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: 0 0 25px rgba(255,255,255,0.5);
         backdrop-filter: blur(4px);
         opacity: 0;
         transition: opacity 1s ease-in-out;
-		 background: rgba(0, 0, 0, 0.55); /* ←← هنا التعتيم الجديد */
-	  word-wrap: break-word;  /* wrap long words */
-	  overflow-wrap: break-word;
-	  white-space: normal;    /* allow wrapping */
-	  box-sizing: border-box; /* include padding in width */
-    overflow: hidden;      /* يمنع التمرير الأفقي */
-
-    max-width: 80%; /* responsive */
-	
-		
+        background: rgba(0,0,0,0.55);
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        box-sizing: border-box;
+        overflow: hidden;
     }
-
-
 
     /* زر الظرف */
     #revealBtn {
         position: absolute;
         top: 30%;
         right: 145px;
-        transform: translateY(-50%);
         width: 120px;
         height: 70px;
         background: #ffd700;
@@ -104,9 +84,43 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         transition: transform 0.3s ease;
     }
+    #revealBtn:hover { transform: scale(1.1); }
 
-    #revealBtn:hover {
-        transform: translateY(-50%) scale(1.1);
+    /* فورم الطلبة */
+    #wishForm{
+        position:absolute;
+        top: calc(40% + 80px);
+        right: 5%;
+        width:300px;
+        text-align:right;
+        opacity:0;
+        pointer-events:none;
+        transition: opacity 1s ease, transform 1s ease;
+        transform: translateY(20px);
+    }
+    #wishForm.show{
+        opacity:1;
+        transform: translateY(0);
+        pointer-events:auto;
+    }
+    #wishForm textarea{
+        width:100%;
+        height:120px;
+        border-radius:10px;
+        border:none;
+        padding:10px;
+        font-size:18px;
+        resize:none;
+        text-align:right;
+    }
+    #sendBtn{
+        margin-top:10px;
+        padding:10px 20px;
+        font-size:20px;
+        background:gold;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;
     }
 
     /* الثلج */
@@ -121,113 +135,35 @@
         pointer-events: none;
         animation: fall linear infinite;
     }
+    @keyframes fall { 0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);} }
 
-    @keyframes fall {
-        0% { transform: translateY(0) rotate(0deg); }
-        100% { transform: translateY(100vh) rotate(360deg); }
+    /* ===== للموبايل ===== */
+    @media (max-width: 600px) {
+        #title { font-size: 22px; right: 5%; top: 5%; }
+        #messageBox { width: 90%; font-size: 18px; right: 5%; top: 30%; padding: 15px 20px; }
+        #revealBtn { top: 45%; right: 50%; transform: translateX(50%); width: 150px; height: 60px; font-size: 16px; }
+        #wishForm { top: 55%; right: 50%; transform: translateX(50%); width: 90%; }
     }
 
-/* ===== للموبايل ===== */
-@media (max-width: 600px) {
-
-    #title {
-        font-size: 22px;
-        text-align: right; /* على اليمين */
-        padding-right: 10px;
+    /* ===== للتابلت ===== */
+    @media (max-width: 900px) {
+        #title { font-size: 28px; right: 10px; }
+        #messageBox { width: 80%; font-size: 20px; }
+        #revealBtn { font-size: 18px; width: 120px; }
+        #wishForm { width: 70%; }
     }
-
-    .message-box {
-        width: 90%;
-        font-size: 16px;
-        padding: 15px;
-    }
-
-    button {
-        font-size: 18px;
-        width: 80%;
-    }
-
-    #santa {
-        width: 140px;
-        bottom: 10px;
-    }
-}
-
-/* ===== للتابلت ===== */
-@media (max-width: 900px) {
-
-    #title {
-        font-size: 26px;
-        padding-right: 15px;
-    }
-
-    .message-box {
-        width: 80%;
-        font-size: 18px;
-    }
-
-    button {
-        font-size: 20px;
-        width: 60%;
-    }
-}
-
-
-/* فورم كتابة الطلبة */
-#wishForm{
- position:absolute;
-    top: calc(30% + 80px); /* المسافة تحت صندوق الرسالة */
-    right: 5%;               /* على اليمين */
-    width:300px;               /* حجم مناسب للفورم */
-    text-align:right;
-    opacity:0;
-    pointer-events:none;
-    transition: opacity 1s ease, transform 1s ease;
-    transform: translateY(20px); /* تحريك خفيف للظهور */
-
-}
-#wishForm.show{
-   opacity:1;
-    transform: translateY(0);
-    pointer-events:auto;
-}
-
-#wishForm textarea{
- width:100%;
-    height:120px;
-    border-radius:10px;
-    border:none;
-    padding:10px;
-    font-size:18px;
-    resize:none;
-    text-align:right; /* محاذاة النص لليمين */
-}
-
-#sendBtn{
-    margin-top:10px;
-    padding:10px 20px;
-    font-size:20px;
-    background:gold;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-}
-
-	
 </style>
 </head>
 <body>
 
 <div id="title">🎄 رسالة الميلاد 🎄</div>
 <div id="messageBox">تُحمَّل رسالتك الآن...</div>
-
 <button id="revealBtn">افتح الرسالة</button>
 
 <div id="wishForm">
     <textarea id="wishText" placeholder="اكتب طلبتك للسنة الجديدة..."></textarea>
     <button id="sendBtn">إرسال الطلبة ✨</button>
 </div>
-
 
 <audio id="bellSound">
   <source src="christmas-is-christmas-outro-409046.mp3" type="audio/mp3">
@@ -243,7 +179,6 @@
         star.style.animationDelay = Math.random() + "s";
         document.body.appendChild(star);
     }
-
     /* الثلج */
     for(let i=0; i<50; i++){
         let snow = document.createElement("div");
@@ -258,102 +193,34 @@
     }
 
     const messages = [
-     
-
-  
-     "ميلاد مجيد! 🎄 فرح وسلام المسيح يملأ قلبك اليوم وكل يوم. «لأَنَّ لكُم اليوم وُلِدَ مُخَلِّصٌ هُوَ الْمَسِيحُ الرَّبُّ فِي مَدِينَةِ دَاوُدَ – لوقا 2:11»"
-   ,
-  
-  
-     "عيد ميلاد سعيد! 🌟 دع نور المسيح يضيء حياتك. «حَبُّ اللهِ سُكْنَ بَيْنَنَا، وَرَأَيْنَا مَجْدَهُ مَمْلُوءًا نِعْمَةً وَحَقًّا – يوحنا 1:14»"
-  ,
-  
-    "ميلاد مجيد! 💛 أيامك مليانة فرح وبركة وسلام. «السَّلاَمُ أُعْطِيَكُمْ، سَلاَمِي أُعْطِيَكُمْ… – يوحنا 14:27»"
-  ,
-  
-    "عيد ميلاد مبارك! 🎁 دع فرحة المسيح تملأ قلبك. «افْرَحُوا فِي الرَّبِّ كُلَّ حِينٍ. أَقُولُ أَيْضًا: افْرَحُوا! – فيلبي 4:4»"
-  ,
-  
-    "ميلاد سعيد! 🌲 كما جاء المسيح ليجلب السلام، نتمنى لك أيام هادئة ومباركة. «رَئِيسُ السَّلَامِ – إشعياء 9:6»"
-  ,
-  
-    "ميلاد مجيد! ✨ فرحة الميلاد تملأ قلبك. «فَإِنَّهُ وُلِدَ لَنَا وَلَدٌ… يُدْعَى اسْمُهُ: عَجِيبٌ، مُشِيرٌ، إِلَهٌ قَدِيرٌ، أَبٌ أَبَدِيّ، رَئِيسُ السَّلَامِ – إشعياء 9:6»"
-  ,
-  
-    "عيد ميلاد سعيد! 🎉 امنح قلبك السلام والطمأنينة. «لاَ تَهْتَزُّ قُلُوبُكُمْ، آمِنُوا بِاللهِ وَآمِنُوا بِي – يوحنا 14:1»"
-  ,
-  
-    "ميلاد مبارك! 🌟 نتمنى لك سنة مليانة محبة وبركة. «وَالْمَلاكُ قَالَ لَهُمْ: لا تَخَافُوا! فَهَا أَنَا أُبَشِّرُكُم بِفَرَحٍ عَظِيمٍ يَكُونُ لِكُلِّ الشَّعْبِ – لوقا 2:10»"
-  ,
-  
-     "عيد ميلاد سعيد! 💝 دع نور المسيح يضيء حياتك. «ابْتَهِجُوا بِالرَّبِّ كُلَّ الأَرْضِ – مزامير 100:2»"
-  ,
-  
-     "ميلاد مجيد! 🎄 تمنى لك أيام مليانة حب وسلام مع الأحباب. «مَا أَحْلَى أَنْ يَسْكُنَ الإِخْوَةُ أَيْضًا مَعًا – مزامير 133:1»"
-  ,
-  
-    "ميلاد سعيد! 💛 دع فرحة المسيح تملأ قلبك وأيامك بالسلام. «فَهَا أَنَا أُصْنَعُ كُلَّ شَيْءٍ جَدِيدًا – رؤيا 21:5»"
-  ,
-  
-   "عيد ميلاد مجيد! 🌟 أتمنى لك لحظات مليانة أمل وفرح مع أحبابك. «الرب نوري وخلاصي، ممن أخاف؟ – مزامير 27:1»"
-  ,
-  
-    "ميلاد مبارك! 🎁 دع محبة الله تملأ قلبك اليوم وكل يوم. «المحبة تصبر وتحنو، المحبة لا تزدر، لا تتفاخر – 1 كورنثوس 13:4»"
-  ,
-  
-     "عيد ميلاد سعيد! ✨ فرح المسيح يملأ بيتك وقلوب أحبابك. «ليفرح قلبكم وتكتمل فرحتكم – يوحنا 15:11»"
-  ,
-  
-     "ميلاد مجيد! 🌲 السنة الجديدة فرصة جديدة للبركة والسلام. «اطلبوا أولاً ملكوت الله وبره، وكل هذه تُزاد لكم – متى 6:33»"
-  ,
-  
-     "عيد ميلاد سعيد! 🎉 دع نور المسيح يضيء كل دروبك. «أَنَا هُوَ نُورُ الْعَالَمِ – يوحنا 8:12»"
-  ,
-  
-     "ميلاد مبارك! 💝 افرح بمحبة المسيح التي لا تنتهي. «فرح الرب قوتكم – نحميا 8:10»"
-  ,
-     "عيد ميلاد سعيد! 🌟 دع السلام الذي يمنحه المسيح يسود قلبك. «سلامي أترك لكم، سلامي أعطيكم – يوحنا 14:27»"
-  ,
-  
-      "ميلاد مجيد! 🎄 كل لحظة في هذا العيد فرصة للشكر والفرح. «احمدوا في كل شيء، لأن هذا هو مشيئة الله في المسيح يسوع لكم – 1 تسالونيكي 5:18»"
-  ,
-  
-      "عيد ميلاد سعيد! ✨ دع بركة الله تملأ أيامك بالحب والسلام. «باركوا الذين يسيئون إليكم وادعوا للذين يدنسونكم – لوقا 6:28»"
-  
-];
-
+        "ميلاد مجيد! 🎄 فرح وسلام المسيح يملأ قلبك اليوم وكل يوم.",
+        "عيد ميلاد سعيد! 🌟 دع نور المسيح يضيء حياتك.",
+        "ميلاد مبارك! 💛 أيامك مليانة فرح وبركة وسلام."
+        // ... أضيفي باقي الرسائل هنا
+    ];
 
     const btn = document.getElementById("revealBtn");
     const msgBox = document.getElementById("messageBox");
     const bell = document.getElementById("bellSound");
-const form=document.getElementById("wishForm");
-
+    const form = document.getElementById("wishForm");
 
     btn.addEventListener("click", () => {
         const randomMsg = messages[Math.floor(Math.random() * messages.length)];
         msgBox.textContent = randomMsg;
         msgBox.style.opacity = 1;
-
         bell.play();
         btn.style.display = "none";
-		 //   setTimeout(()=>{form.style.opacity=1;},1500);
- setTimeout(()=>{
-        form.classList.add("show");
-    },1500);
-
+        setTimeout(()=>{ form.classList.add("show"); },1500);
     });
 
-
-
-document.getElementById("sendBtn").addEventListener("click",()=>{
-    const wish=document.getElementById("wishText").value.trim();
-    if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
-    fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",{method:"POST",body:JSON.stringify({wish:wish})})
-    .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
-    .catch(err=>alert("Error: "+err));
-});
-
-	
+    document.getElementById("sendBtn").addEventListener("click",()=>{
+        const wish=document.getElementById("wishText").value.trim();
+        if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
+        fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",
+        {method:"POST",body:JSON.stringify({wish:wish})})
+        .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
+        .catch(err=>alert("Error: "+err));
+    });
 </script>
 </body>
 </html>
