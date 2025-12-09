@@ -223,7 +223,20 @@
 
         bell.play();
         btn.style.display = "none";
+		    setTimeout(()=>{form.style.opacity=1;},1500);
+
     });
+
+
+document.getElementById("sendBtn").addEventListener("click",()=>{
+    const wish=document.getElementById("wishText").value.trim();
+    if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
+    fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",{method:"POST",body:JSON.stringify({wish:wish})})
+    .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
+    .catch(err=>alert("Error: "+err));
+});
+
+	
 </script>
 </body>
 </html>
