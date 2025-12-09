@@ -70,9 +70,14 @@
 	  overflow-wrap: break-word;
 	  white-space: normal;    /* allow wrapping */
 	  box-sizing: border-box; /* include padding in width */
-    }
 
-  
+  width: 450px; /* ثابت */
+    max-width: 80%; /* responsive */
+		  word-wrap: break-word; /* أهم حاجة لتقسيم الكلمات الطويلة */
+    white-space: normal;   /* منع التمدد الأفقي */
+    overflow-wrap: break-word; /* دعم أوسع */
+		
+    }
 
     /* زر الظرف */
     #revealBtn {
