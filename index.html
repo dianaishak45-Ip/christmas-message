@@ -1,157 +1,138 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>رسالة الميلاد</title>
 <style>
-    body {
-        height: 100vh;
-        overflow: hidden;
-        font-family: "Cairo", sans-serif;
-        color: white;
-        position: relative;
-        background-image: url('BG_2.png');
-        background-size: cover;
-        background-position: center center;
-        background-repeat: no-repeat;
-    }
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Cairo", sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('BG_2.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+    position: relative;
+}
 
-    /* النجوم */
-    .star {
-        position: absolute;
-        width: 3px;
-        height: 3px;
-        background: white;
-        border-radius: 50%;
-        animation: twinkle 2s infinite ease-in-out;
-    }
-    @keyframes twinkle { 0%,100% { opacity:0.2;} 50% {opacity:1;} }
+/* النجوم */
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite ease-in-out;
+}
+@keyframes twinkle {0%,100%{opacity:0.2;}50%{opacity:1;}}
 
-    /* العنوان */
-    #title {
-        position: absolute;
-        top: 5%;
-        right: 20px;
-        font-size: 48px;
-        color: #ffd700;
-        text-align: right;
-        text-shadow: 0 0 12px rgba(0,0,0,1),0 0 25px rgba(0,0,0,0.9);
-    }
+/* العنوان */
+#title {
+    font-size: 6vw; /* حجم متغير حسب العرض */
+    color: #ffd700;
+    text-align: center;
+    text-shadow: 0 0 12px rgba(0,0,0,1),0 0 25px rgba(0,0,0,0.9);
+    margin-bottom: 2vh;
+}
 
-    /* صندوق الرسالة */
-    #messageBox {
-        position: absolute;
-        top: 35%;
-        right: 20px;
-        width: 400px;
-        max-width: 90%;
-        font-size: 26px;
-        padding: 20px 30px;
-        border-radius: 15px;
-        border: 1px solid rgba(255,255,255,0.3);
-        box-shadow: 0 0 25px rgba(255,255,255,0.5);
-        backdrop-filter: blur(4px);
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-        background: rgba(0,0,0,0.55);
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
+/* صندوق الرسالة */
+#messageBox {
+    width: 80%;
+    max-width: 450px;
+    font-size: 4vw;
+    padding: 2vh 2vw;
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 25px rgba(255,255,255,0.5);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    background: rgba(0,0,0,0.55);
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: center;
+    box-sizing: border-box;
+}
 
-    /* زر الظرف */
-    #revealBtn {
-        position: absolute;
-        top: 30%;
-        right: 145px;
-        width: 120px;
-        height: 70px;
-        background: #ffd700;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        padding: 0;
-        clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        font-weight: bold;
-        color: black;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-    }
-    #revealBtn:hover { transform: scale(1.1); }
+/* زر الظرف */
+#revealBtn {
+    margin-top: 2vh;
+    width: 40%;
+    max-width: 150px;
+    height: 50px;
+    background: #ffd700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 4vw;
+    font-weight: bold;
+    color: black;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
 
-    /* فورم الطلبة */
-    #wishForm{
-        position:absolute;
-        top: calc(40% + 80px);
-        right: 5%;
-        width:300px;
-        text-align:right;
-        opacity:0;
-        pointer-events:none;
-        transition: opacity 1s ease, transform 1s ease;
-        transform: translateY(20px);
-    }
-    #wishForm.show{
-        opacity:1;
-        transform: translateY(0);
-        pointer-events:auto;
-    }
-    #wishForm textarea{
-        width:100%;
-        height:120px;
-        border-radius:10px;
-        border:none;
-        padding:10px;
-        font-size:18px;
-        resize:none;
-        text-align:right;
-    }
-    #sendBtn{
-        margin-top:10px;
-        padding:10px 20px;
-        font-size:20px;
-        background:gold;
-        border:none;
-        border-radius:10px;
-        cursor:pointer;
-    }
+/* فورم الطلبة */
+#wishForm{
+    width: 80%;
+    max-width: 400px;
+    margin-top: 3vh;
+    opacity:0;
+    pointer-events:none;
+    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(20px);
+}
+#wishForm.show{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events:auto;
+}
+#wishForm textarea{
+    width:100%;
+    height:100px;
+    border-radius:10px;
+    border:none;
+    padding:10px;
+    font-size: 4vw;
+    resize:none;
+    text-align:right;
+}
+#sendBtn{
+    margin-top:10px;
+    padding:10px 20px;
+    font-size: 4vw;
+    background:gold;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+}
 
-    /* الثلج */
-    .snowflake {
-        position: absolute;
-        top: -10px;
-        width: 5px;
-        height: 5px;
-        background: white;
-        border-radius: 50%;
-        opacity: 0.8;
-        pointer-events: none;
-        animation: fall linear infinite;
-    }
-    @keyframes fall { 0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);} }
+/* الثلج */
+.snowflake {
+    position: absolute;
+    top: -10px;
+    width: 5px;
+    height: 5px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+@keyframes fall {0%{transform:translateY(0) rotate(0deg);}100%{transform:translateY(100vh) rotate(360deg);}}
 
-    /* ===== للموبايل ===== */
-    @media (max-width: 600px) {
-        #title { font-size: 22px; right: 5%; top: 5%; }
-        #messageBox { width: 90%; font-size: 18px; right: 5%; top: 30%; padding: 15px 20px; }
-        #revealBtn { top: 45%; right: 50%; transform: translateX(50%); width: 150px; height: 60px; font-size: 16px; }
-        #wishForm { top: 55%; right: 50%; transform: translateX(50%); width: 90%; }
-    }
-
-    /* ===== للتابلت ===== */
-    @media (max-width: 900px) {
-        #title { font-size: 28px; right: 10px; }
-        #messageBox { width: 80%; font-size: 20px; }
-        #revealBtn { font-size: 18px; width: 120px; }
-        #wishForm { width: 70%; }
-    }
+/* responsive adjustments */
+@media (max-width: 600px) {
+    #title { font-size: 8vw; }
+    #messageBox { font-size: 5vw; }
+    #revealBtn { font-size: 5vw; height: 45px; }
+    #wishForm textarea { font-size:5vw; height:80px; }
+    #sendBtn { font-size:5vw; }
+}
 </style>
 </head>
 <body>
@@ -170,57 +151,56 @@
 </audio>
 
 <script>
-    /* النجوم الخلفية */
-    for (let i = 0; i < 50; i++) {
-        let star = document.createElement("div");
-        star.classList.add("star");
-        star.style.top = Math.random() * 100 + "vh";
-        star.style.left = Math.random() * 100 + "vw";
-        star.style.animationDelay = Math.random() + "s";
-        document.body.appendChild(star);
-    }
-    /* الثلج */
-    for(let i=0; i<50; i++){
-        let snow = document.createElement("div");
-        snow.className = "snowflake";
-        snow.style.left = Math.random()*100 + "vw";
-        let size = 2 + Math.random()*5;
-        snow.style.width = size + "px";
-        snow.style.height = size + "px";
-        snow.style.animationDuration = 5 + Math.random()*5 + "s";
-        snow.style.animationDelay = Math.random()*5 + "s";
-        document.body.appendChild(snow);
-    }
+/* النجوم */
+for(let i=0;i<50;i++){
+    let star = document.createElement("div");
+    star.classList.add("star");
+    star.style.top=Math.random()*100+"vh";
+    star.style.left=Math.random()*100+"vw";
+    star.style.animationDelay=Math.random()+"s";
+    document.body.appendChild(star);
+}
 
-    const messages = [
-        "ميلاد مجيد! 🎄 فرح وسلام المسيح يملأ قلبك اليوم وكل يوم.",
-        "عيد ميلاد سعيد! 🌟 دع نور المسيح يضيء حياتك.",
-        "ميلاد مبارك! 💛 أيامك مليانة فرح وبركة وسلام."
-        // ... أضيفي باقي الرسائل هنا
-    ];
+/* الثلج */
+for(let i=0;i<50;i++){
+    let snow = document.createElement("div");
+    snow.className="snowflake";
+    snow.style.left=Math.random()*100+"vw";
+    let size = 2 + Math.random()*5;
+    snow.style.width=size+"px";
+    snow.style.height=size+"px";
+    snow.style.animationDuration = 5 + Math.random()*5 +"s";
+    snow.style.animationDelay = Math.random()*5+"s";
+    document.body.appendChild(snow);
+}
 
-    const btn = document.getElementById("revealBtn");
-    const msgBox = document.getElementById("messageBox");
-    const bell = document.getElementById("bellSound");
-    const form = document.getElementById("wishForm");
+const messages=[
+"ميلاد مجيد! 🎄 فرح وسلام المسيح يملأ قلبك اليوم وكل يوم.",
+"عيد ميلاد سعيد! 🌟 دع نور المسيح يضيء حياتك.",
+"ميلاد مبارك! 💛 أيامك مليانة فرح وبركة وسلام."
+];
 
-    btn.addEventListener("click", () => {
-        const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-        msgBox.textContent = randomMsg;
-        msgBox.style.opacity = 1;
-        bell.play();
-        btn.style.display = "none";
-        setTimeout(()=>{ form.classList.add("show"); },1500);
-    });
+const btn=document.getElementById("revealBtn");
+const msgBox=document.getElementById("messageBox");
+const bell=document.getElementById("bellSound");
+const form=document.getElementById("wishForm");
 
-    document.getElementById("sendBtn").addEventListener("click",()=>{
-        const wish=document.getElementById("wishText").value.trim();
-        if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
-        fetch("https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",
-        {method:"POST",body:JSON.stringify({wish:wish})})
-        .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
-        .catch(err=>alert("Error: "+err));
-    });
+btn.addEventListener("click",()=>{
+    const randomMsg = messages[Math.floor(Math.random()*messages.length)];
+    msgBox.textContent=randomMsg;
+    msgBox.style.opacity=1;
+    bell.play();
+    btn.style.display="none";
+    setTimeout(()=>{ form.classList.add("show");},1500);
+});
+
+document.getElementById("sendBtn").addEventListener("click",()=>{
+    const wish=document.getElementById("wishText").value.trim();
+    if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
+    fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec",{method:"POST",body:JSON.stringify({wish:wish})})
+    .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
+    .catch(err=>alert("Error: "+err));
+});
 </script>
 </body>
 </html>
