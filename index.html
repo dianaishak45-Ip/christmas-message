@@ -269,14 +269,42 @@
         setTimeout(()=>{ form.classList.add("show"); },1500);
     });
 
-    document.getElementById("sendBtn").addEventListener("click",()=>{
+    /*document.getElementById("sendBtn").addEventListener("click",()=>{
         const wish=document.getElementById("wishText").value.trim();
         if(!wish){alert("اكتب الطلبة الأول 🙏");return;}
         fetch("https://script.google.com/macros/s/AKfycbyhjax85TJIOyuKvbsOkNYwRx5rYq7M0Vonq40-zfL__Ge817-in-_rDnZo2rmhzzQf/exec",
         {method:"POST",body:JSON.stringify({wish:wish})})
         .then(res=>alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
         .catch(err=>alert("Error: "+err));
-    });
+    }); */
+    document.getElementById("sendBtn").addEventListener("click", () => {
+    const wish = document.getElementById("wishText").value.trim();
+    if (!wish) {
+        alert("اكتب الطلبة الأول 🙏");
+        return;
+    }
+
+    fetch("https://script.google.com/macros/s/AKfycbwujFu1DXm93xVMiwqRYYsPjNgwRA3P3kt3Kpy4ejzXRhoAXrbnWbIM1ufszYsUQnmH/exec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ wish: wish })
+    })
+    .then(res => res.json())  // تحويل الرد لـ JSON
+    .then(data => {
+        if(data.status === "success"){
+            alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!");
+            document.getElementById("wishText").value = ""; // تفريغ الحقل
+        } else {
+            console.error("خطأ في الكتابة على الشيت:", data.message);
+            alert("❌ حصل خطأ أثناء إرسال الطلبة، حاول مرة أخرى");
+        }
+    })
+    .catch(err => {
+        console.error("Error:", err);
+        alert("❌ حدث خطأ في الاتصال، تأكد من الإنترنت وحاول مرة أخرى");
+    });   
+});
+
 </script>
 </body>
 </html>
