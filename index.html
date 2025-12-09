@@ -291,46 +291,13 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ wish: wish })
     })
-   /* .then(res => {
+   .then(res => {
         if (!res.ok) {
             console.error("خطأ في إرسال الطلبة:", res.status, res.statusText);
         }
     })
-    .catch(err => console.error("Error:", err)); */
-
-        .then(res => res.json())
-.then(() => alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
-.catch(err => alert("Error: " + err));
-
-        
+    .catch(err => console.error("Error:", err));   
 });
-
-
-
-
-fetch(
-  "https://script.google.com/macros/s/AKfycbze8QLvYuDtcOP4OJAzB6y30dbxh5s8kOydntxf3bPj1cMq6lkz36Mlv9bckV9aRSHV/exec",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"   // ← مهم جداً
-    },
-    body: JSON.stringify({ wish: wish })
-  }
-)
-.then(res => res.json())
-.then(() => alert("💛 تم إرسال الطلبة بنجاح — ربنا يسمعك!"))
-.catch(err => alert("Error: " + err));
-
-
-
-
-
-
-
-
-
-    
 </script>
 </body>
 </html>
